@@ -141,6 +141,8 @@ export function createFiberRoot(
   hydrationCallbacks: null | SuspenseHydrationCallbacks,
 ): FiberRoot {
   const root: FiberRoot = (new FiberRootNode(containerInfo, tag, hydrate): any);
+  // aizigao
+  console.log('aizigao/createFiberRoot',root);
   if (enableSuspenseCallback) {
     root.hydrationCallbacks = hydrationCallbacks;
   }
@@ -149,6 +151,7 @@ export function createFiberRoot(
   // stateNode is any.
   const uninitializedFiber = createHostRootFiber(tag);
   root.current = uninitializedFiber;
+  // TODO: aizigao 这里为什么又指向的FiberRoot
   uninitializedFiber.stateNode = root;
 
   initializeUpdateQueue(uninitializedFiber);

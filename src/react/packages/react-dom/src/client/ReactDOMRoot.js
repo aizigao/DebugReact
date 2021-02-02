@@ -117,6 +117,8 @@ function createRootImpl(
   const hydrationCallbacks =
     (options != null && options.hydrationOptions) || null;
   const root = createContainer(container, tag, hydrate, hydrationCallbacks);
+  debugger
+
   markContainerAsRoot(root.current, container);
   if (hydrate && tag !== LegacyRoot) {
     const doc =
