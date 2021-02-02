@@ -108,53 +108,26 @@ describe('ReactCompositeComponent', () => {
     };
   });
 
-  if (require('shared/ReactFeatureFlags').disableModulePatternComponents) {
-    it('should not support module pattern components', () => {
-      function Child({test}) {
-        return {
-          render() {
-            return <div>{test}</div>;
-          },
-        };
-      }
+  it('should support module pattern components', () => {
+    function Child({test}) {
+      return {
+        render() {
+          return <div>{test}</div>;
+        },
+      };
+    }
 
-      const el = document.createElement('div');
-      expect(() => {
-        expect(() => ReactDOM.render(<Child test="test" />, el)).toThrow(
-          'Objects are not valid as a React child (found: object with keys {render}).',
-        );
-      }).toErrorDev(
-        'Warning: The <Child /> component appears to be a function component that returns a class instance. ' +
-          'Change Child to a class that extends React.Component instead. ' +
-          "If you can't use a class try assigning the prototype on the function as a workaround. " +
-          '`Child.prototype = React.Component.prototype`. ' +
-          "Don't use an arrow function since it cannot be called with `new` by React.",
-      );
+    const el = document.createElement('div');
+    expect(() => ReactDOM.render(<Child test="test" />, el)).toErrorDev(
+      'Warning: The <Child /> component appears to be a function component that returns a class instance. ' +
+        'Change Child to a class that extends React.Component instead. ' +
+        "If you can't use a class try assigning the prototype on the function as a workaround. " +
+        '`Child.prototype = React.Component.prototype`. ' +
+        "Don't use an arrow function since it cannot be called with `new` by React.",
+    );
 
-      expect(el.textContent).toBe('');
-    });
-  } else {
-    it('should support module pattern components', () => {
-      function Child({test}) {
-        return {
-          render() {
-            return <div>{test}</div>;
-          },
-        };
-      }
-
-      const el = document.createElement('div');
-      expect(() => ReactDOM.render(<Child test="test" />, el)).toErrorDev(
-        'Warning: The <Child /> component appears to be a function component that returns a class instance. ' +
-          'Change Child to a class that extends React.Component instead. ' +
-          "If you can't use a class try assigning the prototype on the function as a workaround. " +
-          '`Child.prototype = React.Component.prototype`. ' +
-          "Don't use an arrow function since it cannot be called with `new` by React.",
-      );
-
-      expect(el.textContent).toBe('test');
-    });
-  }
+    expect(el.textContent).toBe('test');
+  });
 
   it('should support rendering to different child types over time', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MorphingComponent />);
@@ -569,7 +542,7 @@ describe('ReactCompositeComponent', () => {
   });
 
   it('should warn when shouldComponentUpdate() returns undefined', () => {
-    class ClassComponent extends React.Component {
+    class Component extends React.Component {
       state = {bogus: false};
 
       shouldComponentUpdate() {
@@ -581,10 +554,10 @@ describe('ReactCompositeComponent', () => {
       }
     }
 
-    const instance = ReactTestUtils.renderIntoDocument(<ClassComponent />);
+    const instance = ReactTestUtils.renderIntoDocument(<Component />);
 
     expect(() => instance.setState({bogus: true})).toErrorDev(
-      'Warning: ClassComponent.shouldComponentUpdate(): Returned undefined instead of a ' +
+      'Warning: Component.shouldComponentUpdate(): Returned undefined instead of a ' +
         'boolean value. Make sure to return true or false.',
     );
   });

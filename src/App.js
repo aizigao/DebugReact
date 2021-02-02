@@ -1,5 +1,5 @@
 // import * as React from "react";
-import {React, Component, useState} from "./CONST";
+import { React, Component, useState } from "./CONST";
 
 // import {useState, useEffect} from "react";
 // import UseMemoPage from "./pages/UseMemoPage";
@@ -13,12 +13,14 @@ import SetStatePage from "./pages/SetStatePage";
 // import RefPage from "./pages/RefPage";
 // import SuspensePage from "./pages/SuspensePage";
 import DiffPage from "./pages/DiffPage";
+import AizigaoTest from "./pages/AizigaoTest";
 // import ClassFunctionComponent from "./pages/ClassFunctionComponent";
 // import UseReducerPage from "./pages/UseReducerPage";
 
 export default function App(props) {
   return (
     <div className="app">
+      3333
       {/* <CommentListPage /> */}
       {/* <PureComponentPage /> */}
       {/* <ReactMemoPage /> */}
@@ -26,14 +28,11 @@ export default function App(props) {
       {/* <UseMemoPage /> */}
       {/* <ExamplePage /> */}
       {/* <ContextPage /> */}
-
       {/* <SetStatePage /> */}
-
       {/* <RefPage /> */}
       {/* <SuspensePage /> */}
-
-      <DiffPage />
-
+      {/* <DiffPage /> */}
+      {/* <AizigaoTest></AizigaoTest> */}
       {/* <ClassFunctionComponent /> */}
       {/* <UseReducerPage /> */}
     </div>

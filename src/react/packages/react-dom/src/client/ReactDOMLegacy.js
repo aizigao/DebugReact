@@ -31,7 +31,7 @@ import {
   getPublicRootInstance,
   findHostInstance,
   findHostInstanceWithWarning,
-} from 'react-reconciler/src/ReactFiberReconciler';
+} from 'react-reconciler/inline.dom';
 import getComponentName from 'shared/getComponentName';
 import invariant from 'shared/invariant';
 import ReactSharedInternals from 'shared/ReactSharedInternals';
@@ -174,9 +174,9 @@ function warnOnInvalidCallback(callback: mixed, callerName: string): void {
 
 function legacyRenderSubtreeIntoContainer(
   parentComponent: ?React$Component<any, any>,
-  children: ReactNodeList,
+  children: ReactNodeList, // react element
   container: Container,
-  forceHydrate: boolean,
+  forceHydrate: boolean, // false
   callback: ?Function,
 ) {
   if (__DEV__) {
@@ -225,7 +225,7 @@ export function findDOMNode(
   componentOrElement: Element | ?React$Component<any, any>,
 ): null | Element | Text {
   if (__DEV__) {
-    const owner = (ReactCurrentOwner.current: any);
+    let owner = (ReactCurrentOwner.current: any);
     if (owner !== null && owner.stateNode !== null) {
       const warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
       if (!warnedAboutRefsInRender) {
