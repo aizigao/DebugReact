@@ -195,7 +195,6 @@ function legacyRenderSubtreeIntoContainer(
       forceHydrate,
     );
     fiberRoot = root._internalRoot;
-    debugger
     if (typeof callback === 'function') {
       const originalCallback = callback;
       callback = function() {
